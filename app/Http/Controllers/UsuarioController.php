@@ -15,16 +15,22 @@ class UsuarioController extends Controller{
     //ESTE HACE UNA CONSULTA DE LOS ULTIMOS 5 (TAKE(5)) PARA NO GASTAR TANTO EN LA CONSULTA
     public function index(){ return Usuario::orderBy('id','desc')->take(5)->get(); }
 
+
+    //ESTA FUNCION RECIBE CORREO Y CONTRASEÑA COMO PARAMETROS
+    //TIENE QUE CREAR UNA SESION Y ENVIARLA AL FRONTED DE ALGUNA MANERA
     public function login(Request $request){
         if($usuario=Usuario::where('email','=',$request->email)->first()){            
             if($usuario->password==md5($request->password)){
-                session(['nombre' => $usuario->nombre]);
-                return response()->json(['estatus'=>'Aprobado', 'info'=>$usuario->tipoc], 400);
+                
+                return response()->json(['estatus'=>'Aprobado', 
+                'alias'=>$usuario->nombre, 'tipoc'=>$usuario->tipoc], 400);
             }
+
             else{
                 return response()->json(['estatus'=>'Rechazado', 'info'=>$request->password], 400);
             }
         }
+
         else{
             return response()->json(['estatus'=>'Rechazado','info'=>$request->email], 400);
         }

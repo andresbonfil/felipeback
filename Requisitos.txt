@@ -2,3 +2,4 @@ modelo de usuarios (registrarse)
 -correo_electronico
 -contrasena
 -tipocta: vendedor, comprador, admin
+NO YA VALIO

@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>COTISAZACIONES BONFIL</h1>
-    <img src="{{asset('images/otras/constru.jpg')}}" alt="No sale :("><br>
+   No ya valio chetos
     @yield('contenido')
 </body>
 </html>

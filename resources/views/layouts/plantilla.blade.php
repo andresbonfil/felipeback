@@ -10,7 +10,7 @@
     <h2><a href="{{route('usuario')}}"></a> usuario</h2>
     <h2><a href="{{route('emailRecovery')}}"></a> emailrecovery</h2>
     <h2><a href="{{route('emailTest')}}"></a> email</h2>
-    <p>Modificaciones hechas a fuerza y sigue sin funcionar</p>
+    <p>Modificaciones hechas a fuerza y sigue sin funcionar quite remoto github</p>
     @yield('contenido')
 </body>
 </html>

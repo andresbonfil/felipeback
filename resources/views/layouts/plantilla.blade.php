@@ -6,8 +6,7 @@
     <title>@yield('title')</title>
 </head>
 <body>
-    <h1>COTISAZACIONES BONFIL</h1>
-   No ya valio chetos
+    <h1>COTISAZACIONES BONFIL (trabajando en producción)</h1>
     @yield('contenido')
 </body>
 </html>

@@ -23,7 +23,7 @@ class UsuarioController extends Controller{
             if($usuario->password==md5($request->password)){
                 
                 return response()->json(['estatus'=>'Aprobado', 
-                'alias'=>$usuario->nombre,'tipoc'=>$usuario->tipoc], 400);
+                'alias'=>$usuario->nombre, 'tipoc'=>$usuario->tipoc], 400);
             }
 
             else{

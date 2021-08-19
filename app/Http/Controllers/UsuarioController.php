@@ -21,9 +21,9 @@ class UsuarioController extends Controller{
     public function login(Request $request){
         if($usuario=Usuario::where('email','=',$request->email)->first()){            
             if($usuario->password==md5($request->password)){
-                session(['alias' => $usuario->nombre]);
-                session(['tipoc' => $usuario->tipoc]);
-                return response()->json(['estatus'=>'Aprobado', compact('session')], 400);
+                
+                return response()->json(['estatus'=>'Aprobado', 
+                'alias'=>$usuario->nombre,'tipoc'=>$usuario->tipoc], 400);
             }
 
             else{

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Usuario;
-use Illuminate\Http\Request;
+use Illuminate\Http\Request;//agregadas de aqui pabajo las siguientes 3
 use App\Mail\testEmail;
 use App\Mail\recontraEmail;
 use Illuminate\Support\Facades\Mail;
@@ -13,17 +13,18 @@ class UsuarioController extends Controller{
     
     //ESTA ES LA FUNCION DE PRUEBA PARA VER LA LISTA DE USAURIOS EN FORMATO JSON
     //ESTE HACE UNA CONSULTA DE LOS ULTIMOS 5 (TAKE(5)) PARA NO GASTAR TANTO EN LA CONSULTA
-    public function index(){ return Usuario::orderBy('id','desc')->take(5)->get(); }
+    public function index(){ return Usuario::orderBy('id','desc')->take(15)->get(); }
 
+    //REGRESA USUARIOS VENDEDORES PRIMERO LOS ULTIMOS AGREGADOS
+    public function vendedor(){ return Usuario::where('tipoc','Vendedor')->orderBy('id','desc')->get(); }
 
     //ESTA FUNCION RECIBE CORREO Y CONTRASEÑA COMO PARAMETROS
     //TIENE QUE CREAR UNA SESION Y ENVIARLA AL FRONTED DE ALGUNA MANERA
     public function login(Request $request){
         if($usuario=Usuario::where('email','=',$request->email)->first()){            
-            if($usuario->password==md5($request->password)){
-                
+            if($usuario->password==md5($request->password)){             
                 return response()->json(['estatus'=>'Aprobado', 
-                'alias'=>$usuario->nombre, 'tipoc'=>$usuario->tipoc], 400);
+                'alias'=>$usuario->nombre, 'tipoc'=>$usuario->tipoc, 'id'=>$usuario->id], 400);
             }
 
             else{
@@ -55,7 +56,6 @@ class UsuarioController extends Controller{
         }
     }
 
-
     //ESTA ES LA FUNCION QUE MANDA INSTRUCCIONES PARA RECUPERAR TU CORREO
     //SI EL EMAIL EXISTE EN NUESTRA BD GENERA UN CODIGO TOKEN Y LO ANEXA AL EMAIL
     //DEL QUE SE ESTA HACIENDO LA SOLICITUD SI NO EXISTE DEVUELVE RECHAZADO
@@ -78,7 +78,6 @@ class UsuarioController extends Controller{
             return response()->json(['estatus'=>'Rechazado','info'=>$request->txtEmail], 400);
         }
     }
-
 
     //ESTA FUNCION RECIBE LA PETICION DE CAMBIO DE CONTRASEÑA TIENE QUE VALIDAR EL CORREO SOLICITANTE
     //Y TIENE QUE VALIDAR QUE EL TOKEN SEA VALIDO Y TIENE QUE CAMBIARLO PARA QUE YA NO SE PUEDA REALIZAR
@@ -113,8 +112,11 @@ class UsuarioController extends Controller{
         return 'Gracias por recibir correo';
     }
 
+    public function show($id){
+        $usuario=Usuario::find($id);
+        return response($usuario, 200);
+    }
     //public function create(){}
-    //public function show(usuario $usuario){ }
     //public function edit(usuario $usuario){ }
     //public function update(Request $request, usuario $usuario){ }
     //public function destroy(usuario $usuario){ }

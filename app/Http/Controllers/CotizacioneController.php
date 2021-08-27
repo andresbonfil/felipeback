@@ -21,9 +21,13 @@ class CotizacioneController extends Controller
     
     public function create(){ }
 
-    public function show(Cotizacione $cotizacione)
+    public function show($id)
     {
-        //
+        return Cotizacione::orderBy('id','desc')->where('idc','=',$id)->get();
+    }
+    public function show2($id)
+    {
+        return Cotizacione::orderBy('id','desc')->where('idv','=',$id)->get();
     }
 
 

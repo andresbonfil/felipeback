@@ -24,7 +24,7 @@ class UsuarioController extends Controller{
         if($usuario=Usuario::where('email','=',$request->email)->first()){            
             if($usuario->password==md5($request->password)){             
                 return response()->json(['estatus'=>'Aprobado', 
-                'alias'=>$usuario->nombre, 'tipoc'=>$usuario->tipoc, 'id'=>$usuario->id], 400);
+                'alias'=>$usuario->nombre, 'tipoc'=>$usuario->tipoc, 'id'=>$usuario->id, 'email'=>$usuario->email], 400);
             }
 
             else{
@@ -103,15 +103,6 @@ class UsuarioController extends Controller{
     }
 
 
-    //ESTE ES SOLO UN EMAIL GENERICO MANDA UN MENSAJE GENERICO DENTRO DE UN EMAIL
-    //SOLO PARA VER COMO FUNIONA EL MAKE:MAILER
-    public function emailtest(){
-        $data=['nombre'=>'andres', 'apellido'=>'bonfil', 'telefono'=>7355781754];
-        $correo=new testEmail($data);
-        Mail::to('andresbonfil@gmail.com')->send($correo);
-        return 'Gracias por recibir correo';
-    }
-
     public function show($id){
         $usuario=Usuario::find($id);
         return response($usuario, 200);
@@ -120,4 +111,13 @@ class UsuarioController extends Controller{
     //public function edit(usuario $usuario){ }
     //public function update(Request $request, usuario $usuario){ }
     //public function destroy(usuario $usuario){ }
+
+    //ESTE ES SOLO UN EMAIL GENERICO MANDA UN MENSAJE GENERICO DENTRO DE UN EMAIL
+    //SOLO PARA VER COMO FUNIONA EL MAKE:MAILER
+    public function emailtest(){
+        $data=['nombre'=>'andres', 'apellido'=>'bonfil', 'telefono'=>7355781754];
+        $correo=new testEmail($data);
+        Mail::to('andresbonfil@gmail.com')->send($correo);
+        return 'Gracias por recibir correo';
+    }
 }

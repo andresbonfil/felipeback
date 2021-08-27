@@ -21,5 +21,7 @@ Route::get('productoprovedor', [ProductoController::class, 'productoprovedor'])-
 Route::get('vendedor', [UsuarioController::class, 'vendedor'])->name('vendedor');
 
 Route::apiResource("cotizacion", CotizacioneController::class);
+Route::get('cotizacion2/{id}', [CotizacioneController::class, 'show2']);
+
 
 Route::apiResource("detalle", DetalleController::class);

@@ -24,7 +24,7 @@ class UsuarioController extends Controller{
         if($usuario=Usuario::where('email','=',$request->email)->first()){            
             if($usuario->password==md5($request->password)){             
                 return response()->json(['estatus'=>'Aprobado', 
-                'alias'=>$usuario->nombre, 'tipoc'=>$usuario->tipoc, 'id'=>$usuario->id, 'email'=>$usuario->email], 400);
+                'alias'=>$usuario->nombre, 'tipoc'=>$usuario->tipoc, 'id'=>$usuario->id, 'email'=>$usuario->email], 200);
             }
 
             else{

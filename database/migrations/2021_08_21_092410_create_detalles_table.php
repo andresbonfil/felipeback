@@ -20,7 +20,7 @@ class CreateDetallesTable extends Migration
             $table->decimal('precio');
             $table->decimal('importe');
             $table->bigInteger('folio')->unsigned();
-            $table->foreign('folio')->references('id')->on('cotizaciones');
+            $table->foreign('folio')->references('id')->on('cotizaciones')->onDelete('cascade');
             $table->timestamps();
         });
     }

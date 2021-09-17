@@ -10,7 +10,7 @@ use Illuminate\Queue\SerializesModels;
 class testEmail extends Mailable
 {
     use Queueable, SerializesModels;
-    public $subject = "ESTO ES UNA PRUEBA...";
+    public $subject = "probando correo...";
     protected $datos;
     public function __construct($data){
         $this->datos = $data;

@@ -12,7 +12,7 @@ class ProductoController extends Controller
 
     public function store(Request $request){
         if(Producto::where('nombre','=',$request->nombre)->
-                     where('idprovedor','=',$request->idprovedor)->first()){ 
+                     where('idv','=',$request->idv)->first()){ 
             return response()->json(['estatus'=>'Rechazado','info'=>'Producto existente:'
             .$request->nombre], 400);
         }
@@ -23,19 +23,16 @@ class ProductoController extends Controller
             $producto->pu = $request->pu;
             $producto->pe = $request->pe;
             $producto->cpe = $request->cpe;
-            $producto->disponible = $request->disponible;
-            $producto->idprovedor= $request->idprovedor;
+            $producto->disp = $request->disp;
+            $producto->idv= $request->idv;
             $producto->save();
 
             return response()->json(['estatus'=>'Aprobado','info'=>'se registro:'.$request->nombre], 200);
         }
-        //if(Producto::where('email','=',$request->txtEmail)->first()){ 
-        //    return response()->json(['estatus'=>'Rechazado','info'=>$request->txtEmail], 400);
-        //}
     }
     
     public function productoprovedor(Request $request){
-        $listaproductos=Producto::where('idprovedor','=',$request->idprovedor)->get();
+        $listaproductos=Producto::where('idv','=',$request->idv)->get();
         return response($listaproductos, 200);
     }
 
@@ -46,8 +43,21 @@ class ProductoController extends Controller
 
 
     //public function create(){ }
-    //public function show(producto $producto){  }
+    public function show($id){
+        $producto=Producto::find($id);
+        return response($producto, 200);
+    }
     //public function edit(producto $producto){  }
-    //public function update(Request $request, producto $producto){  }
-    //public function destroy(producto $producto){  }
+    public function update(Request $request){
+        $producto=Producto::find($request->id);
+        if(is_null($producto)){ return response()->json(['message'=>'Producto Not Found'], 404); }
+        $producto->update($request->all());
+        return response($producto, 200);
+    }
+    public function destroy($id){
+        $producto=Producto::find($id);
+        if(is_null($producto)){ return response()->json(['message'=>'Producto Not Found'], 404); }
+        $producto->delete();
+        return response()->json(['message'=>'borrado'], 204);
+    }
 }

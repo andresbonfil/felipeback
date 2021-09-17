@@ -16,8 +16,8 @@ class ProductoSeeder extends Seeder
             'pu'=>'50',
             'pe'=>'40',
             'cpe'=>'3',
-            'disponible'=>'s',
-            'idprovedor'=>'1'
+            'disp'=>'s',
+            'idv'=>'1'
         ]);
         DB::table('productos')->insert([
             'nombre'=>'Cargador tipo C vorago',
@@ -25,8 +25,8 @@ class ProductoSeeder extends Seeder
             'pu'=>'70',
             'pe'=>'65',
             'cpe'=>'3',
-            'disponible'=>'s',
-            'idprovedor'=>'1'
+            'disp'=>'s',
+            'idv'=>'1'
         ]);
         DB::table('productos')->insert([
             'nombre'=>'Cargador para iphone TechZone',
@@ -34,46 +34,9 @@ class ProductoSeeder extends Seeder
             'pu'=>'100',
             'pe'=>'80',
             'cpe'=>'5',
-            'disponible'=>'s',
-            'idprovedor'=>'1'
+            'disp'=>'s',
+            'idv'=>'1'
         ]);
-        DB::table('productos')->insert([
-            'nombre'=>'Azucar 1kg.',
-            'descripcion'=>'Azucar suelta por kilo o medio kilo',
-            'pu'=>'22',
-            'pe'=>'20',
-            'cpe'=>'3',
-            'disponible'=>'s',
-            'idprovedor'=>'2'
-        ]);
-        DB::table('productos')->insert([
-            'nombre'=>'Huevo Calvario 1kg',
-            'descripcion'=>'Huevo calvario blanco doble llema',
-            'pu'=>'35',
-            'pe'=>'32',
-            'cpe'=>'5',
-            'disponible'=>'s',
-            'idprovedor'=>'2'
-        ]);
-
-        DB::table('productos')->insert([
-            'nombre'=>'Acondicionador Ego 400ml.',
-            'descripcion'=>'Para peinarse suavecito',
-            'pu'=>'25',
-            'pe'=>'20',
-            'cpe'=>'10',
-            'disponible'=>'s',
-            'idprovedor'=>'3'
-        ]);
-
-        DB::table('productos')->insert([
-            'nombre'=>'Gel Ego 200ml.',
-            'descripcion'=>'Para peinarse bien peinado',
-            'pu'=>'13',
-            'pe'=>'11',
-            'cpe'=>'5',
-            'disponible'=>'s',
-            'idprovedor'=>'3'
-        ]);
+        
     }
 }

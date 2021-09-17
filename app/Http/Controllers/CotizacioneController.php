@@ -29,6 +29,10 @@ class CotizacioneController extends Controller
     {
         return Cotizacione::orderBy('id','desc')->where('idv','=',$id)->get();
     }
+    public function show3($id)
+    {
+        return Cotizacione::orderBy('id','desc')->where('id','=',$id)->get();
+    }
 
 
     public function edit(Cotizacione $cotizacione)
@@ -43,8 +47,11 @@ class CotizacioneController extends Controller
     }
 
 
-    public function destroy(Cotizacione $cotizacione)
+    public function destroy($id)
     {
-        //
+        $cotizacione=Cotizacione::find($id);
+        if(is_null($cotizacione)){ return response()->json(['message'=>'Detalle Not Found'], 404); }
+        $cotizacione->delete();
+        return response()->json(['message'=>'borrado'], 204);
     }
 }

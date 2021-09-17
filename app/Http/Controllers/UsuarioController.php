@@ -12,19 +12,24 @@ use Illuminate\Support\Facades\Mail;
 class UsuarioController extends Controller{
     
     //ESTA ES LA FUNCION DE PRUEBA PARA VER LA LISTA DE USAURIOS EN FORMATO JSON
-    //ESTE HACE UNA CONSULTA DE LOS ULTIMOS 5 (TAKE(5)) PARA NO GASTAR TANTO EN LA CONSULTA
-    public function index(){ return Usuario::orderBy('id','desc')->take(15)->get(); }
+    //ESTE HACE UNA CONSULTA DE LOS ULTIMOS PARA NO GASTAR TANTO EN LA CONSULTA
+    public function index(){ return Usuario::orderBy('id','desc')->take(20)->get(); }
 
     //REGRESA USUARIOS VENDEDORES PRIMERO LOS ULTIMOS AGREGADOS
-    public function vendedor(){ return Usuario::where('tipoc','Vendedor')->orderBy('id','desc')->get(); }
+    public function vendedores(){ return Usuario::where('tipoc','Vendedor')->orderBy('id','desc')->get(); }
 
     //ESTA FUNCION RECIBE CORREO Y CONTRASEÑA COMO PARAMETROS
     //TIENE QUE CREAR UNA SESION Y ENVIARLA AL FRONTED DE ALGUNA MANERA
     public function login(Request $request){
         if($usuario=Usuario::where('email','=',$request->email)->first()){            
             if($usuario->password==md5($request->password)){             
-                return response()->json(['estatus'=>'Aprobado', 
-                'alias'=>$usuario->nombre, 'tipoc'=>$usuario->tipoc, 'id'=>$usuario->id, 'email'=>$usuario->email], 200);
+                return response()->json([
+                    'estatus'=>'Aprobado', 
+                    'alias'=>$usuario->nombre, 
+                    'tipoc'=>$usuario->tipoc, 
+                    'id'=>$usuario->id, 
+                    'email'=>$usuario->email
+                ], 200);
             }
 
             else{
@@ -56,7 +61,7 @@ class UsuarioController extends Controller{
         }
     }
 
-    //ESTA ES LA FUNCION QUE MANDA INSTRUCCIONES PARA RECUPERAR TU CORREO
+    //ESTA ES LA FUNCION QUE MANDA MAIL CON INSTRUCCIONES PARA RECUPERAR TU CORREO
     //SI EL EMAIL EXISTE EN NUESTRA BD GENERA UN CODIGO TOKEN Y LO ANEXA AL EMAIL
     //DEL QUE SE ESTA HACIENDO LA SOLICITUD SI NO EXISTE DEVUELVE RECHAZADO
     //UTILIZA (recontraEmail.php) ARRIBA SE ANEXA Y SE INICIALIZA CON $data
@@ -79,6 +84,25 @@ class UsuarioController extends Controller{
         }
     }
 
+    
+    
+    public function show($id){
+        $usuario=Usuario::find($id);
+        return response($usuario, 200);
+    }
+                        //public function create(){}
+                        //public function edit(usuario $usuario){ }
+                        //public function update(Request $request, usuario $usuario){ }
+                        //public function destroy(usuario $usuario){ }
+    
+    //ESTE ES SOLO UN EMAIL GENERICO MANDA UN MENSAJE GENERICO DENTRO DE UN EMAIL
+    //SOLO PARA VER COMO FUNIONA EL MAKE:MAILER
+    public function emailtest(){
+        $data=['nombre'=>'andres', 'apellido'=>'bonfil', 'telefono'=>7355781754];
+        $correo=new testEmail($data);
+        Mail::to('andresbonfil@gmail.com')->send($correo);
+        return 'Se envió correo de prueba a andresbonfil@gmail.com';
+    }
     //ESTA FUNCION RECIBE LA PETICION DE CAMBIO DE CONTRASEÑA TIENE QUE VALIDAR EL CORREO SOLICITANTE
     //Y TIENE QUE VALIDAR QUE EL TOKEN SEA VALIDO Y TIENE QUE CAMBIARLO PARA QUE YA NO SE PUEDA REALIZAR
     //LA OPERACION NO SIN ANTES VOLVER A SOLICITUAR QUE LO ENVIEN A TU CORREO. COMO NO FORMA PARTE DEL
@@ -103,21 +127,5 @@ class UsuarioController extends Controller{
     }
 
 
-    public function show($id){
-        $usuario=Usuario::find($id);
-        return response($usuario, 200);
-    }
-    //public function create(){}
-    //public function edit(usuario $usuario){ }
-    //public function update(Request $request, usuario $usuario){ }
-    //public function destroy(usuario $usuario){ }
-
-    //ESTE ES SOLO UN EMAIL GENERICO MANDA UN MENSAJE GENERICO DENTRO DE UN EMAIL
-    //SOLO PARA VER COMO FUNIONA EL MAKE:MAILER
-    public function emailtest(){
-        $data=['nombre'=>'andres', 'apellido'=>'bonfil', 'telefono'=>7355781754];
-        $correo=new testEmail($data);
-        Mail::to('andresbonfil@gmail.com')->send($correo);
-        return 'Gracias por recibir correo';
-    }
 }
+

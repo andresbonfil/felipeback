@@ -10,7 +10,7 @@ use Illuminate\Queue\SerializesModels;
 class recontraEmail extends Mailable
 {
     use Queueable, SerializesModels;
-    public $subject = "Recuperación de contraseña Cotizaciones Bonfil";
+    public $subject = "Recuperar contraseña";
     protected $datos;
     public function __construct($data){
         $this->datos = $data;

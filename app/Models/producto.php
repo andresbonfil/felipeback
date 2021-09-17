@@ -14,7 +14,7 @@ class producto extends Model
         'pu',
         'pe', 
         'cpe',
-        'disponible',
-        'idprovedor'
+        'disp',
+        'idv'
     ];
 }

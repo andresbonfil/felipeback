@@ -14,9 +14,9 @@ class CreateProductosTable extends Migration{
             $table->decimal('pu');       //PRECIO UNITARIO
             $table->decimal('pe');      //PRECIO ESPECIAL
             $table->integer('cpe');    //CANTIDAD PARA PRECIO ESPECIAL
-            $table->char('disponible', 1);//¿DISPONIBLE? s/n
-            $table->bigInteger('idprovedor')->unsigned();            
-            $table->foreign('idprovedor')->references('id')->on('usuarios');
+            $table->char('disp', 1);//¿DISPONIBLE? s/n
+            $table->bigInteger('idv')->unsigned();            
+            $table->foreign('idv')->references('id')->on('usuarios');
             $table->timestamps();
         });
     }

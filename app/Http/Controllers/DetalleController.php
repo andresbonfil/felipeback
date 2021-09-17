@@ -23,5 +23,10 @@ class DetalleController extends Controller{
     public function create(){  }
     public function edit(detalle $detalle){  }
     public function update(Request $request, detalle $detalle){  }
-    public function destroy(detalle $detalle){  }
+    public function destroy($id){
+        $detalle=Detalle::find($id);
+        if(is_null($detalle)){ return response()->json(['message'=>'Detalle Not Found'], 404); }
+        $detalle->delete();
+        return response()->json(['message'=>'borrado'], 204);
+    }
 }

@@ -17,28 +17,42 @@ class UsuarioSeeder extends Seeder
         DB::table('usuarios')->insert([
             'nombre'=>'PC Life Systems',
             'tipoc'=>'Vendedor',
-            'email'=>'pclifesistems@pclifesistems.com',
+            'email'=>'deleoneduardo443@gmail.com',
             'password'=>'21232f297a57a5a743894a0e4a801fc3',
             'token'=>'000000'
         ]);
         DB::table('usuarios')->insert([
-            'nombre'=>'Abarrotes Mario',
+            'nombre'=>'falsovendedor #1',
             'tipoc'=>'Vendedor',
-            'email'=>'abarrotesmario@gmail.com',
+            'email'=>'emailfalso1@fake1.com',
             'password'=>'21232f297a57a5a743894a0e4a801fc3',
-            'token'=>'111111'
+            'token'=>'000000'
         ]);
         DB::table('usuarios')->insert([
-            'nombre'=>'Boutique dulce',
+            'nombre'=>'falsovendedor #2',
             'tipoc'=>'Vendedor',
-            'email'=>'dulce@gmail.com',
+            'email'=>'emailfalso2@fake2.com',
             'password'=>'21232f297a57a5a743894a0e4a801fc3',
-            'token'=>'222222'
+            'token'=>'000000'
         ]);
         DB::table('usuarios')->insert([
             'nombre'=>'Andres Bonfil',
             'tipoc'=>'Comprador',
             'email'=>'andresbonfil@gmail.com',
+            'password'=>'21232f297a57a5a743894a0e4a801fc3',
+            'token'=>'222222'
+        ]);
+        DB::table('usuarios')->insert([
+            'nombre'=>'Falso comprador #1',
+            'tipoc'=>'Comprador',
+            'email'=>'fakemail1@yajuu.com',
+            'password'=>'21232f297a57a5a743894a0e4a801fc3',
+            'token'=>'222222'
+        ]);
+        DB::table('usuarios')->insert([
+            'nombre'=>'Falso comprador #2',
+            'tipoc'=>'Comprador',
+            'email'=>'fakemail2@yajuu.com',
             'password'=>'21232f297a57a5a743894a0e4a801fc3',
             'token'=>'222222'
         ]);
